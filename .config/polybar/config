@@ -8,12 +8,14 @@
 ;=====================================================
 
 [colors]
+; apparently background doesn't support rgba colors
+; well, it does indeed. It follows the #aarrggbb format
 ;background = ${xrdb:color0:#000}
-background = rgba(0,0,0,0)
+background = #44000000
 ;background-alt = #444
-background-alt = rgba(0,0,0,0)
+background-alt = #00000000
 ;foreground = ${xrdb:color7:#dfdfdf}
-foreground = #efefef
+foreground = #ffefefef
 foreground-alt = #555
 ;primary = #1fad83
 primary = #4bffdc
@@ -22,6 +24,7 @@ alert = #bd2c40
 testing-color1 = #4bffdc
 ;testing-color2 = #e60053
 testing-color2 = #000
+pipe-color = #000
 
 [bar/leo]
 ;monitor = ${env:MONITOR:HDMI-1}
@@ -48,12 +51,12 @@ module-margin-left = 1
 module-margin-right = 2
 
 font-0 = FontAwesome:size=15:pixelsize=12;0
-font-1 = Roboto Mono for Powerline:fontformat=truetype:size=8:antialias=false;0
+font-1 = Fira Mono for Powerline::size=9:antialias=false;1
 font-2 = fixed:pixelsize=10;1
 font-3 = siji:pixelsize=10;1
 
 modules-left = bspwm i3
-modules-center = music
+modules-center = music prev play-pause next
 ;modules-right = filesystem xbacklight volume xkeyboard memory cpu wlan eth battery temperature date powermenu
 modules-right = filesystem xbacklight volume memory cpu wlan battery date powermenu
 
@@ -121,7 +124,7 @@ mount-1 = /home
 ;   %used%
 
 ;label-mounted = %{F#0a81f5}%mountpoint%%{F-}: %used%/%total%
-label-mounted = %{F#000}%mountpoint%%{F-}: %used%/%total%
+label-mounted = %{F#000}%mountpoint%%{F-}: %used%/%total% %{F#000}|%{F-}
 label-unmounted = %mountpoint% not mounted
 label-unmounted-foreground = ${colors.foreground-alt}
 
@@ -149,13 +152,14 @@ type = internal/i3
 format = <label-state> <label-mode>
 index-sort = true
 wrapping-scroll = false
+show-all = true
 
 ;workspace icons
 ws-icon-0 = "1:; "
 ws-icon-1 = "2:; "
-ws-icon-2 = "3:; "
-ws-icon-3 =
-ws-icon-4 =
+ws-icon-2 = "3:;"
+ws-icon-3 = "4:;"
+ws-icon-4 = "5:;"
 ws-icon-5 = 
 ws-icon-6 =
 ws-icon-7 = "8:;"
@@ -179,6 +183,7 @@ label-focused-padding = ${module/bspwm.label-focused-padding}
 
 ; unfocused = Inactive workspace on any monitor
 label-unfocused = %icon%
+;label-unfocused-background = ${self.label-focused-background}
 label-unfocused-padding = ${module/bspwm.label-occupied-padding}
 
 ; visible = Active workspace on unfocused monitor
@@ -188,7 +193,7 @@ label-visible-underline = ${self.label-focused-underline}
 label-visible-padding = ${self.label-focused-padding}
 
 ; urgent = Workspace with urgency hint set
-label-urgent = %icon%
+label-urgent = %icon% 
 label-urgent-background = ${module/bspwm.label-urgent-background}
 label-urgent-padding = ${module/bspwm.label-urgent-padding}
 
@@ -231,11 +236,12 @@ card = intel_backlight
 [module/cpu]
 type = internal/cpu
 interval = 2
-format-prefix = " "
-format-prefix-foreground = ${colors.foreground-alt}
+;format-prefix = "|"
+;format-prefix-foreground = ${colors.foreground-alt}
 ;format-underline = #f90000
-format-underline = ${colors.testing-color1}
-label = %percentage:2%%
+;format-underline = ${colors.testing-color1}
+;label-foreground = ${colors.testing-color2}
+label = %percentage:2%% %{F#000}|%{F-}
 
 [module/memory]
 type = internal/memory
@@ -249,7 +255,8 @@ interval = 2
 ;   <label> (default)
 ;   <bar-used>
 ;   <bar-free>
-format = <label> <bar-used>
+;format = <label> <bar-used> %{F#000}|%{F-}
+format = <label> %{F#000}|%{F-}
 
 ; Available tokens:
 ;   %percentage_used% (default)
@@ -260,7 +267,8 @@ format = <label> <bar-used>
 ;   %mb_used%
 ;   %mb_free%
 ;   %mb_total%
-label =  %gb_used%/%gb_total%
+;label =  %gb_used%/%gb_total%
+label = Memory: %gb_used%/%gb_total%
 
 ; Only applies if <bar-used> is used
 bar-used-indicator = 
@@ -281,7 +289,7 @@ type = internal/network
 interface = wlo1
 interval = 3.0
 
-format-connected = <ramp-signal> <label-connected>
+format-connected = <ramp-signal> <label-connected> %{F#000}|%{F-}
 ; Available tokens:
 ;   %ifname%    [wireless+wired]
 ;   %local_ip%  [wireless+wired]
@@ -293,8 +301,8 @@ format-connected = <ramp-signal> <label-connected>
 ; Default: %ifname% %local_ip%
 ;<label-connected>
 ;format-connected-underline = #9f78e1
-format-connected-underline = ${colors.testing-color2}
-label-connected = %signal%%
+;format-connected-underline = ${colors.testing-color2}
+label-connected = %local_ip%
 
 format-disconnected =
 ;format-disconnected = <label-disconnected>
@@ -307,7 +315,8 @@ format-disconnected =
 ;ramp-signal-2 = 
 ;ramp-signal-3 = 
 ;ramp-signal-4 = 
-ramp-signal-0 = 
+;ramp-signal-0 = 
+ramp-signal-0 = ""
 ;ramp-signal-foreground = ${colors.foreground-alt}
 
 [module/eth]
@@ -339,7 +348,7 @@ time-alt = %H:%M:%S
 format-prefix = 
 format-prefix-foreground = ${colors.foreground-alt}
 ;format-underline = #0a6cf5
-format-underline = ${colors.testing-color2}
+;format-underline = ${colors.testing-color2}
 
 label = %date% %time%
 
@@ -351,7 +360,7 @@ type = internal/volume
 ;   <ramp-volume>
 ;   <bar-volume>
 
-format-volume = <ramp-volume> <label-volume>
+format-volume = <ramp-volume> <label-volume> %{F#000}|%{F-}
 ramp-volume-0 = " "
 ramp-volume-1 = " "
 ramp-volume-2 = " "
@@ -385,16 +394,17 @@ battery = BAT1
 adapter = ACAD
 full-at = 98
 
-format-charging = <animation-charging> <label-charging>
+format-charging = <animation-charging> <label-charging> %{F#000}|%{F-}
 ;format-charging-underline = #ffb52a
-format-charging-underline = ${colors.testing-color1}
+;format-charging-underline = ${colors.testing-color1}
 
-format-discharging = <ramp-capacity> <label-discharging>
-format-discharging-underline = ${self.format-charging-underline}
+format-discharging = <ramp-capacity> <label-discharging> %{F#000}|%{F-}
+;format-discharging-underline = ${self.format-charging-underline}
 
+format-full = <ramp-capacity> 100% %{F#000}|%{F-}
 format-full-prefix = " "
 format-full-prefix-foreground = ${colors.foreground-alt}
-format-full-underline = ${self.format-charging-underline}
+;format-full-underline = ${self.format-charging-underline}
 
 ramp-capacity-0 = "  "
 ramp-capacity-1 = "  "
@@ -438,11 +448,79 @@ ramp-foreground = ${colors.foreground-alt}
 type = custom/script
 interval = 2
 
-label = %output:0:100:...%
+label = %output:0:100:...% 
 exec = ~/.config/polybar/scripts/spotify-bash
+;click-left = playerctl previous
+;click-middle = playerctl play-pause
+;click-right = playerctl next
+
+[module/next]
+type = custom/script
+format = <label>
+label = %output%
+exec = $HOME/.config/polybar/scripts/next.sh
+label-foreground = ${colors.testing-color1}
+click-left = playerctl next
+
+[module/play-pause]
+type = custom/script
+format = <label>
+label = %output%
+exec = $HOME/.config/polybar/scripts/play-pause.sh
+label-foreground = ${colors.testing-color1}
+click-left = playerctl play-pause
+
+[module/prev]
+type = custom/script
+
+; Available tokens:
+;   %counter%
+; Command to be executed (using "/usr/bin/env sh -c [command]")
+exec = $HOME/.config/polybar/scripts/prev.sh
+
+; Conditional command that, if defined, needs to exit successfully
+; before the main exec command is invoked.
+; Default: ""
+;exec-if = pgrep -x myservice
+
+; Will the script output continous content?
+; Default: false
+;tail = true
+
+; Seconds to sleep between updates
+; Default: 2 (0 if `tail = true`)
+;interval = 90
+
+; Available tags:
+;   <output> - deprecated
+;   <label> (default)
+format = <label>
+;format-background = #999
+format-foreground = ${colors.testing-color1}
+;format-padding = 4
+
+; Available tokens:
+;   %output%
+; Default: %output%
+label = %output%
+
+; Available tokens:
+;   %counter%
+;   %pid%
+;
+; "click-(left|middle|right)" will be executed using "/usr/bin/env sh -c [command]"
 click-left = playerctl previous
-click-middle = playerctl play-pause
-click-right = playerctl next
+;click-middle = echo middle %counter%
+;click-right = echo right %counter%
+
+; Available tokens:
+;   %counter%
+;   %pid%
+;
+; "scroll-(up|down)" will be executed using "/usr/bin/env sh -c [command]"
+;scroll-up = echo scroll up %counter%
+;scroll-down = echo scroll down %counter%
+
 
 [module/powermenu]
 type = custom/menu
@@ -450,13 +528,14 @@ type = custom/menu
 expand-right = true
 
 format-spacing = 1
+format = <label>
 
-label-open = 
+;label-open = 
 label-open-foreground = ${colors.secondary}
 label-close =  cancel
 label-close-foreground = ${colors.secondary}
-label-separator = |
-label-separator-foreground = ${colors.foreground-alt}
+;label-separator = |
+;label-separator-foreground = ${colors.foreground-alt}
 
 menu-0-0 = reboot
 menu-0-0-exec = menu-open-1

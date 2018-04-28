@@ -1,0 +1,13 @@
+#!/bin/bash
+
+icon=""
+player_status=$(playerctl status 2> /dev/null)
+if [[ $? -eq 0 ]]; then
+    metadata="$(playerctl metadata artist) - $(playerctl metadata title)"
+fi
+
+if [[ $player_status = "Playing" ]]; then
+	echo "%{F#4bffdc}$icon  %{F#000}$metadata"
+elif [[ $player_status = "Paused" ]]; then
+    echo "%{F#65737E}$icon $metadata"
+fi
