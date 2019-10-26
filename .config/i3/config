@@ -8,12 +8,11 @@
 # i3 config file (v4)
 #
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
-
 set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:Roboto 11
+font pango:Overpass 11
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -218,6 +217,12 @@ exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 # compton
 exec --no-startup-id compton
 
+# using gnome clipboard manager
+# without it, if select something from a program and close it
+# all of its copied content are gone
+# couldn't properly use a better one
+exec_always --no-startup-id /usr/lib/gsd-clipboard
+
 #bar {
 #        status_command i3blocks -c $HOME/.config/i3/i3blocks.conf
 #	colors {
@@ -230,16 +235,20 @@ exec --no-startup-id compton
 #	}
 #}
 
-## Personal keybindings ##
+## Personal keybindings and configurations ##
+
+# exporting xmodmap personal configuration
+exec_always --no-startup-id $HOME/.xmodmaploader.sh
 
 # set background as /home/leo/Pictures/forest.jpg
-exec_always feh --bg-scale /home/leo/Pictures/blue-forest.jpg
+exec_always --no-startup-id feh --bg-scale /home/leo/Pictures/mrrobot.jpg
 
-# change keyboard layout to the best one
-exec_always setxkbmap -layout us -variant altgr-intl -option nodeadkeys
+# change keyboard layout to the appropriate one
+# exec_always --no-startup-id setxkbmap -layout us -variant altgr-intl -option compose:ralt
+exec_always --no-startup-id setxkbmap -layout br -option compose:ralt
 # change keyboard layort to portuguese
 mode "keyboard" {
-	bindsym u exec setxkbmap -layout us -variant altgr-intl -option nodeadkeys
+	bindsym u exec setxkbmap -layout us -variant altgr-intl -option compose:ralt
 	bindsym p exec setxkbmap -layout br -option nativo-uso
 
 	# back to normal: Enter or Escape
@@ -247,6 +256,14 @@ mode "keyboard" {
 	bindsym Escape mode "default"
 }
 bindsym $mod+Control+l mode "keyboard"
+
+# Configuring touchpad
+# 289 1 is turning tappin on
+# 297 1 is changing the scrolling to natural scrolling
+# exec_always --no-startup-id xinput set-prop 'Synaptics TM3127-001' 289 1
+# exec_always --no-startup-id xinput set-prop 'Synaptics TM3127-001' 297 1
+exec_always --no-startup-id xinput set-prop 'Synaptics TM3127-001' 'libinput Tapping Enabled' 1
+exec_always --no-startup-id xinput set-prop 'Synaptics TM3127-001' 'libinput Natural Scrolling Enabled' 1
 
 # Media control - specially for Spotify
 bindsym XF86AudioPlay exec playerctl play-pause
@@ -268,6 +285,9 @@ bindsym Print exec --no-startup-id deepin-screenshot
 
 # shortcuts
 bindsym $mod+Control+w exec --no-startup-id firefox --new-window https://web.whatsapp.com/
-#bindsym $mod+Control+s exec --no-startup-id spotify
-bindsym $mod+Control+f exec --no-startup-id firefox
+bindsym $mod+Control+s exec spotify
+bindsym $mod+Control+f exec firefox
+bindsym $mod+c exec code
+bindsym $mod+Control+g exec google-chrome-stable
+bindsym $mod+Control+c exec chromium
 

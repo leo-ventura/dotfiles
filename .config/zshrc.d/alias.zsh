@@ -9,4 +9,5 @@ alias correct-kb="setxkbmap -layout us -variant altgr-intl -option nodeadkeys"
 alias hd="hexdump -C"
 alias gdb="gdb -q"
 alias jn="jupyter notebook"
-
+alias simus="$HOME/packages/simus_lin64"
+alias memusage="sudo ncdu -rx /"

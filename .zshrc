@@ -19,14 +19,10 @@ export EDITOR="vim"
 # Sourcing oh-my-zsh
 source $ZSH/oh-my-zsh.sh
 
-# Sourcing aliases
-source $HOME/.config/zshrc.d/alias.zsh
-
-# Sourcing zstyle
-source $HOME/.config/zshrc.d/zstyle.zsh
-
-# Sourcing syntax highlighting
-source $HOME/.config/zshrc.d/syntax-highlighting.zsh
+# Sourcing every file found in $HOME/.config/zshrc.d/
+for f in $HOME/.config/zshrc.d/*.zsh; do
+	source $f
+done
 
 # Binding ctrl+backspace to delete last word
 bindkey '^H' backward-kill-word
