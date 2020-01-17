@@ -1,17 +1,22 @@
 #################################
-#	     	ICONS				#
+#	     ICONS					#
 #################################
-# Lightning	=> e00a
-# >			=> e0b1
+# Lightning => e00a
+# >         => e0b1
 # Terminal	=> f120
 # Battery	=> {f240..f244}
 # Arch		=> f300
 # Lambda	=> λ
 # Headphone	=> f025
 # Spotify	=> f1bc
+# Pi        => π
+# Omega     => Ω
+# cursive L => ℒ
+# Hammer and Sickle  => ☭
+# Right double arrow => 
 
 #################################
-#	     	COLORS				#
+#	     COLORS					#
 #################################
 # Green			=> 014
 # Blue			=> 069
@@ -23,15 +28,15 @@
 # Black			=> 232
 
 #################################
-#	   		REMINDERS			#
+#	   REMINDERS				#
 #################################
-# %K{color_number} text %k	=> set bac*K*ground color to color_number
-# %F{color_number} text %f	=> set *F*oreground color to color_number
-# ╭─				=> to set prompt in a new line 
-# ╰─				=> to set prompt in a new line
+# %K{color_number} text %k	=> set bacKground color to color_number
+# %F{color_number} text %f	=> set Foreground color to color_number
+# ╭─				=> use those to set prompt in a new line 
+# ╰─				=> use those to set prompt in a new line
 
 get_error() {
-	if [[ $? -eq 1 ]]; then
+	if [[ $? -ne 0 ]]; then
 		echo -n "%F{001}:(%f"
 	fi
 }
@@ -65,20 +70,33 @@ get_time() {
 
 get_pwd() {
 	if [[ "$HOME" = $(pwd) ]]; then
+		#r="\uf015 "
 		r="~"
 	else
 		location=${$(pwd)#$HOME}
+		#[[ $pwd = $(pwd) ]] && r=$pwd || r="\uf015 $pwd"
 		[[ $location = $(pwd) ]] && r=$location || r="~$location"
 	fi
-	echo -n "%F{044}$r%f"
+	#echo -n "%F{004}$r%f"
+	#echo -n "%F{044}$r%f"
+	echo -n "%F{093}$r%f"
 }
 
 user() {
 	echo -n "%F{129}$(whoami)%f"
 }
 
+get_git() {
+	branch=$(git branch --show-current 2> /dev/null)
+	if [[ $? -eq 0 ]]; then
+		echo -n "%F{123}|%f %F{006}\ue0a0%f %F{015}${branch}%f "
+	else
+		echo -n ""
+	fi
+}
+
 left_separator="%F{123}$(echo -n '\uf101')%f"
 right_separator="%F{123}$(echo -n '\uf100')%f"
 
-PROMPT=" \$(get_pwd) %F{123}$(echo -n '\uf178')%f  "
-RPROMPT="\$(get_error) "
+PROMPT=" \$(get_pwd) \$(get_git)%F{123}$(echo -n '\uf101')%f  "
+RPROMPT=" \$(get_error) "
