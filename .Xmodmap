@@ -1,0 +1,11 @@
+clear control
+clear mod4
+!trocando control direito para windows key
+!keycode 105 = Super_L
+add control = Control_L
+add mod4 = Super_L Super_R Super_L Hyper_L Control_R
+
+! trocando caps lock por enter
+clear lock
+keycode 66 = Return
+keycode 78 = Caps_Lock NoSymbol Caps_Lock

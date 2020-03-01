@@ -1,0 +1,35 @@
+# compose configuration file
+
+# including the default compose configuration
+include "%L"
+
+
+# user defined compose configuration
+<Multi_key> <s> <k> <less> : "⇠"
+
+# can't make it work
+# <Multi_key> <s> <h> <r> <u> <g> : "¯\_(ツ)_/¯"
+
+
+# Logic symbols
+<Multi_key> <d> <i> <f> <f> : "≠" U2260
+<Multi_key> <less> <minus> <greater> : "↔" U2192
+<Multi_key> <l> <a> : "∧" U2227
+<Multi_key> <l> <o> : "∨" U2228
+<Multi_key> <minus> <greater> : "→" U2192
+<Multi_key> <l> <n> : "¬" U00ac
+<Multi_key> <l> <t> : "⊤" U22A4
+<Multi_key> <l> <f> : "⊥" U22A5
+<Multi_key> <l> <p> <t> : "∀" U2200
+<Multi_key> <l> <e> : "∃" U2203
+<Multi_key> <l> <r> : "⊢" U22A2
+<Multi_key> <l> <r> <r> : "⊨" U22A8
+<Multi_key> <m> <u> : "∪" U222A
+<Multi_key> <m> <i> : "∫" U222B
+<Multi_key> <m> <n> <e> : "∉" U2209
+<Multi_key> <m> <e> : "∈" U2208
+<Multi_key> <m> <s> <u> <m> : "∑" U2211
+<Multi_key> <m> <r> : "√" U221A
+<Multi_key> <m> <r> <3> : "∛" U221B
+<Multi_key> <m> <r> <4> : "∜" U221C
+<Multi_key> <i> <n> <f> : "∞" U221E 
