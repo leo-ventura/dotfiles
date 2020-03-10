@@ -1,16 +1,40 @@
+call plug#begin('~/.vim/plugged')
+	Plug 'valloric/youcompleteme'
+call plug#end()
+
+
+" allowing mouse
 set mouse=a
-set whichwrap=b,s,<,>,[,]
+" set whichwrap=b,s,<,>,[,]
+" setting on syntax and plugin
 filetype plugin on
 syntax on
+" setting numbering
 set number
-set spell
+
+" mappings
 vmap <C-c> "+yi
 vmap <C-x> "+c
 vmap <C-v> c<ESC>"+p
 imap <C-v> <C-r><C-o>+
+
+" setting gui head
 set guiheadroom=0
+
+" setting tab to occupy 4 spaces
 set tabstop=4
 
-colorscheme base16-atelierdune
-set background=dark
-set termguicolors
+" setting proper split
+set splitbelow splitright
+" set termguicolors
+" set onedark_termcolors=256
+" set onedark_terminal_italics=1
+" setting color theme
+colorscheme onedark
+" set background=dark
+
+
+" ===== Personal Plugin Configurations and Remappings
+map <C-b> :NERDTreeToggle<CR> 
+
+map <F12> :YcmCompleter GoTo<CR>
