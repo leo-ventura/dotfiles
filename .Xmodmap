@@ -5,7 +5,10 @@ clear mod4
 add control = Control_L
 add mod4 = Super_L Super_R Super_L Hyper_L Control_R
 
-! trocando caps lock por enter
+! trocando caps lock por ctrl
+! clear lock
+! clear menu
+! remove Lock = Caps_Lock
 clear lock
-keycode 66 = Return
-keycode 78 = Caps_Lock NoSymbol Caps_Lock
+keycode 135 = Caps_Lock 
+keycode 66 = Control_L
