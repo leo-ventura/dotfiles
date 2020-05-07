@@ -2,13 +2,19 @@ clear control
 clear mod4
 !trocando control direito para windows key
 !keycode 105 = Super_L
-add control = Control_L
+add Control = Control_L
 add mod4 = Super_L Super_R Super_L Hyper_L Control_R
 
 ! trocando caps lock por ctrl
 ! clear lock
 ! clear menu
 ! remove Lock = Caps_Lock
-clear lock
-keycode 135 = Caps_Lock 
-keycode 66 = Control_L
+!clear lock
+!keycode 135 = Caps_Lock 
+!keycode 66 = Control_L
+remove Lock = Caps_Lock
+remove Control = Control_L
+keysym Control_L = Caps_Lock
+keysym Caps_Lock = Control_L
+add Lock = Caps_Lock
+add Control = Control_L
