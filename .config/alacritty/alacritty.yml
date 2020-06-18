@@ -1,0 +1,69 @@
+# Colors (Monokai Soda)
+colors:
+  # Default colors
+  primary:
+    background: '#1a1a1a'
+    foreground: '#c4c5b5'
+
+  # Normal colors
+  normal:
+    black:   '#1a1a1a'
+    red:     '#f4005f'
+    green:   '#98e024'
+    yellow:  '#fa8419'
+    blue:    '#9d65ff'
+    magenta: '#f4005f'
+    cyan:    '#58d1eb'
+    white:   '#c4c5b5'
+
+  # Bright colors
+  bright:
+    black:   '#625e4c'
+    red:     '#f4005f'
+    green:   '#98e024'
+    yellow:  '#e0d561'
+    blue:    '#9d65ff'
+    magenta: '#f4005f'
+    cyan:    '#58d1eb'
+    white:   '#f6f6ef'
+
+font:
+  normal:
+    family: Fira Mono for Powerline
+    style: Regular
+
+  bold:
+    family: Fira Mono for Powerline
+    style: Bold
+
+  italic:
+    family: Fira Mono for Powerline
+    style: Italic
+
+  bold_italic:
+    family: Fira Mono for Powerline
+    style: Bold Italic
+
+  size: 9.0
+
+cursor:
+  # Cursor style
+  #
+  # Values for `style`:
+  #   - ▇ Block
+  #   - _ Underline
+  #   - | Beam
+  style: Underline
+
+  # If this is `true`, the cursor will be rendered as a hollow box when the
+  # window is not focused.
+  unfocused_hollow: true
+
+key_bindings:
+  # Control + Shift + Return spaw new instance in the current directory
+  - {
+      key: Return,
+      mods: Control|Shift,
+      action: SpawnNewInstance
+  }
+
