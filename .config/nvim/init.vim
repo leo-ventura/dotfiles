@@ -59,7 +59,7 @@ Plug 'junegunn/fzf.vim'
 call plug#end()
 
 " Colorscheme
-colorscheme evolution
+colorscheme monokai_pro
 
 " --- vim go (polyglot) settings.
 let g:go_highlight_build_constraints = 1
