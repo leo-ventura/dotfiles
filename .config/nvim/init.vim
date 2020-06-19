@@ -39,6 +39,9 @@ set updatetime=50
 " Don't pass messages to |ins-completion-menu|.
 set shortmess+=c
 
+set list
+set listchars=tab:>·,trail:~,extends:>,precedes:<,space:·
+
 set colorcolumn=80
 highlight ColorColumn ctermbg=0 guibg=lightgrey
 
@@ -50,6 +53,8 @@ Plug 'tpope/vim-fugitive'
 Plug 'vim-utils/vim-man'
 Plug 'mbbill/undotree'
 Plug 'sheerun/vim-polyglot'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 
 call plug#end()
 
@@ -116,6 +121,18 @@ let g:netrw_winsize = 25
 
 nnoremap <leader>u :UndotreeShow<CR>
 nnoremap <C-p> :GFiles<CR>
+
+" Search for the current word using fzf
+nnoremap <leader>pw :Rg <C-R>=expand("<cword>")<CR><CR>
+nnoremap <leader>phw :h <C-R>=expand("<cword>")<CR><CR>
+
+" Open Rg for file content search
+nnoremap <Leader>ps :Rg<SPACE>
+" Toggle NerdTree
+nnoremap <leader>b :NERDTreeToggle<CR>
+
+" Go to definition using YouCompleteMe
+nnoremap <F12> :YcmCompleter GoTo<CR>
 
 vnoremap X "_d
 inoremap <C-c> <esc>
