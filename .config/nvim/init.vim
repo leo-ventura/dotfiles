@@ -55,11 +55,19 @@ Plug 'mbbill/undotree'
 Plug 'sheerun/vim-polyglot'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+Plug 'valloric/youcompleteme'
 
 call plug#end()
 
 " Colorscheme
 colorscheme monokai_pro
+
+" Multicursor support
+nmap <silent> <leader><C-c> <Plug>(coc-cursors-position)
+nmap <silent> <leader><C-d> <Plug>(coc-cursors-word)
+xmap <silent> <leader><C-d> <Plug>(coc-cursors-range)
+
+hi CocCursorRange guibg=#b16286 guifg=#ebdbb2
 
 " --- vim go (polyglot) settings.
 let g:go_highlight_build_constraints = 1
@@ -180,4 +188,5 @@ augroup highlight_yank
 augroup END
 
 autocmd BufWritePre * :call TrimWhitespace()
+
 
