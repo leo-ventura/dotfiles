@@ -1,0 +1,8 @@
+# xbindkeys to improve Logitech MX Master side wheel usage
+# thumb wheel up => change tab using ctrl tab
+"xte 'keydown Control_L' 'keydown Tab' 'keyup Tab' 'keyup Control_L'"
+   b:7
+
+# thumb wheel down => backwards tab change using ctrl shift tab
+"xte 'keydown Control_L' 'keydown Shift_L' 'keydown Tab' 'keyup Tab' 'keyup Shift_L' 'keyup Control_L'"
+   b:6
