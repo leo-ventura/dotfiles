@@ -127,7 +127,9 @@ let g:vrfr_rg = 'true'
 let g:netrw_banner = 0
 let g:netrw_winsize = 25
 
+" Show tree of latest undo's
 nnoremap <leader>u :UndotreeShow<CR>
+" Search for file (as VS Code Ctrl + P)
 nnoremap <C-p> :GFiles<CR>
 
 " Search for the current word using fzf
@@ -137,8 +139,10 @@ nnoremap <leader>phw :h <C-R>=expand("<cword>")<CR><CR>
 " Open Rg for file content search
 nnoremap <Leader>ps :Rg<SPACE>
 " Toggle NerdTree
-nnoremap <leader>b :NERDTreeToggle<CR>
+nnoremap <leader>t :NERDTreeToggle<CR>
 
+" Open buffers
+nnoremap <leader>b :Buffers<CR>
 " Go to definition using YouCompleteMe
 nnoremap <F12> :YcmCompleter GoTo<CR>
 
@@ -171,10 +175,16 @@ nmap <silent> <leader>gp <Plug>(coc-diagnostic-prev-error)
 nmap <silent> <leader>gn <Plug>(coc-diagnostic-next-error)
 nnoremap <leader>cr :CocRestart
 
-" Sweet Sweet FuGITive
+" Chooses the commit from the right window
 nmap <leader>gh :diffget //3<CR>
+"Choses the commit from the left window
 nmap <leader>gu :diffget //2<CR>
+" Show git status
 nmap <leader>gs :G<CR>
+" Commit changes
+nmap <leader>gc :Gcommit<CR>
+" Push changes
+nmap <leader>gp :Gpush<CR>
 
 fun! TrimWhitespace()
     let l:save = winsaveview()
