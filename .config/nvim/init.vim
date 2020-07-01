@@ -20,9 +20,11 @@ set incsearch
 set termguicolors
 set scrolloff=8
 set cul
+set clipboard=unnamedplus
 
 " Don't allow nvim to change terminal's cursor
 let $NVIM_TUI_ENABLE_CURSOR_SHAPE = 0
+"let $FZF_DEFAULT_COMMAND = 'rg --files'
 
 " Normal, Visual and Command mode: ▇
 " Insert mode: |
@@ -60,7 +62,7 @@ Plug 'valloric/youcompleteme'
 call plug#end()
 
 " Colorscheme
-colorscheme monokai_pro
+colorscheme monokai_pro_spectrum
 
 " Multicursor support
 nmap <silent> <leader><C-c> <Plug>(coc-cursors-position)
@@ -169,8 +171,8 @@ nmap <leader>gy <Plug>(coc-type-definition)
 nmap <leader>gi <Plug>(coc-implementation)
 nmap <leader>gr <Plug>(coc-references)
 nmap <leader>rr <Plug>(coc-rename)
-nmap <leader>g[ <Plug>(coc-diagnostic-prev)
-nmap <leader>g] <Plug>(coc-diagnostic-next)
+nmap g[ <Plug>(coc-diagnostic-prev)
+nmap g] <Plug>(coc-diagnostic-next)
 nmap <silent> <leader>gp <Plug>(coc-diagnostic-prev-error)
 nmap <silent> <leader>gn <Plug>(coc-diagnostic-next-error)
 nnoremap <leader>cr :CocRestart
@@ -181,6 +183,8 @@ nmap <leader>gh :diffget //3<CR>
 nmap <leader>gu :diffget //2<CR>
 " Show git status
 nmap <leader>gs :G<CR>
+" Show diff
+nmap <leader>gg :Gdiff<CR>
 " Commit changes
 nmap <leader>gc :Gcommit<CR>
 " Push changes
