@@ -13,7 +13,9 @@
 # Omega     => Ω
 # cursive L => ℒ
 # Hammer and Sickle  => ☭
-# Right double arrow => 
+# Right double arrow =>        f101
+# Left separator block =>       
+#
 
 #################################
 #	     COLORS					#
@@ -32,7 +34,7 @@
 #################################
 # %K{color_number} text %k	=> set bacKground color to color_number
 # %F{color_number} text %f	=> set Foreground color to color_number
-# ╭─				=> use those to set prompt in a new line 
+# ╭─				=> use those to set prompt in a new line
 # ╰─				=> use those to set prompt in a new line
 
 get_error() {
@@ -46,7 +48,7 @@ get_battery() {
 	if [[ $percentage -ge 95 ]]; then
 		echo -n "%F{014}$(echo -n '\uf240 ' $percentage)%f"
 	elif [[ $percentage -ge 75 ]]; then
-		echo -n "\uf241  $percentage" 
+		echo -n "\uf241  $percentage"
 	elif [[ $percentage -ge 50 ]]; then
 		echo -n "\uf242  $percentage"
 	elif [[ $percentage -ge 25 ]]; then
@@ -86,17 +88,15 @@ user() {
 	echo -n "%F{129}$(whoami)%f"
 }
 
-get_git() {
+git_info() {
 	branch=$(git branch --show-current 2> /dev/null)
 	if [[ $? -eq 0 ]]; then
 		echo -n "%F{123}|%f %F{006}\ue0a0%f %F{015}${branch}%f "
-	else
-		echo -n ""
 	fi
 }
 
 left_separator="%F{123}$(echo -n '\uf101')%f"
 right_separator="%F{123}$(echo -n '\uf100')%f"
 
-PROMPT=" \$(get_pwd) \$(get_git)%F{123}$(echo -n '\uf101')%f  "
+PROMPT=" \$(get_pwd) \$(git_info)%F{123}$(echo -n '\uf101')%f "
 RPROMPT=" \$(get_error) "
