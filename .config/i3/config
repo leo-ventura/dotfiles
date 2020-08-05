@@ -29,8 +29,9 @@ font pango:Overpass 11
 floating_modifier $mod
 
 # start a terminal
-#bindsym $mod+Return exec i3-sensible-terminal
-bindsym $mod+Return exec termite
+# bindsym $mod+Return exec i3-sensible-terminal
+# bindsym $mod+Return exec termite
+bindsym $mod+Return exec alacritty
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -44,10 +45,10 @@ bindsym $mod+d exec rofi -show run -display-run ">> " -lines 5 -config /home/leo
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
 # change focus
-bindsym $mod+j focus left
-bindsym $mod+k focus down
-bindsym $mod+l focus up
-bindsym $mod+semicolon focus right
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
@@ -56,10 +57,10 @@ bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
 # move focused window
-bindsym $mod+Shift+j move left
-bindsym $mod+Shift+k move down
-bindsym $mod+Shift+l move up
-bindsym $mod+Shift+semicolon move right
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
@@ -68,7 +69,7 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
-bindsym $mod+h split h
+bindsym $mod+g split h
 
 # split in vertical orientation
 bindsym $mod+v split v
@@ -137,10 +138,11 @@ workspace_auto_back_and_forth yes
 
 new_window none
 
-# assinging fixed applications to fixed workspaces
+# assigning fixed applications to fixed workspaces
 for_window [class="^Spotify$"] move to workspace $w10
 #for_window [class="^Spotify$"] floating enable
 assign [class="Telegram"] $w4
+assign [class="discord"] $w5
 
 
 # reload the configuration file
@@ -217,13 +219,12 @@ exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 # compton
 exec --no-startup-id compton
 
-# using gnome clipboard manager
-# without it, if select something from a program and close it
-# all of its copied content are gone
-# couldn't properly use a better one
-exec_always --no-startup-id /usr/lib/gsd-clipboard
+# using xfce clipboard manager
+# without it, if I select something from a program and close it
+# the copied content vanishes
+exec_always --no-startup-id xfce4-clipman
 
-#bar {
+# bar {
 #        status_command i3blocks -c $HOME/.config/i3/i3blocks.conf
 #	colors {
 #		background #000000
@@ -237,8 +238,17 @@ exec_always --no-startup-id /usr/lib/gsd-clipboard
 
 ## Personal keybindings and configurations ##
 
+# Power bluetooth on on start up
+exec_always --no-startup-id bluetoothctl power on
+
+# Start xbindkeys
+exec --no-startup-id xbindkeys
+
 # exporting xmodmap personal configuration
 exec_always --no-startup-id $HOME/.xmodmaploader.sh
+
+# Start nofication daemon
+exec_always --no-startup-id dunst
 
 # set background as /home/leo/Pictures/forest.jpg
 exec_always --no-startup-id feh --bg-scale /home/leo/Pictures/mrrobot.jpg
@@ -248,8 +258,10 @@ exec_always --no-startup-id feh --bg-scale /home/leo/Pictures/mrrobot.jpg
 exec_always --no-startup-id setxkbmap -layout br -option compose:ralt
 # change keyboard layort to portuguese
 mode "keyboard" {
-	bindsym u exec setxkbmap -layout us -variant altgr-intl -option compose:ralt
-	bindsym p exec setxkbmap -layout br -option nativo-uso
+	bindsym u exec setxkbmap -layout us -variant altgr-intl -option compose:ralt && xmodmap $HOME/.Xmodmap
+	bindsym p exec setxkbmap -layout br -option nativo-uso && xmodmap $HOME/.Xmodmap
+    bindsym b exec setxkbmap -layout br -variant dvorak && xmodmap $HOME/.Xmodmap
+    bindsym d exec setxkbmap -layout us -variant dvorak && xmodmap $HOME/.Xmodmap
 
 	# back to normal: Enter or Escape
 	bindsym Return mode "default"
@@ -281,7 +293,7 @@ bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5%
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle
 
 # screenshot
-bindsym Print exec --no-startup-id deepin-screenshot
+bindsym Print exec --no-startup-id deepin-screen-recorder
 
 # shortcuts
 bindsym $mod+Control+w exec --no-startup-id firefox --new-window https://web.whatsapp.com/
@@ -290,4 +302,7 @@ bindsym $mod+Control+f exec firefox
 bindsym $mod+c exec code
 bindsym $mod+Control+g exec google-chrome-stable
 bindsym $mod+Control+c exec chromium
+bindsym $mod+Control+t exec telegram-desktop
+bindsym $mod+Control+n exec notion-app
+bindsym $mod+Control+d exec discord
 
