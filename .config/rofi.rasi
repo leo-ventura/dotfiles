@@ -1,8 +1,6 @@
 * {
     selected-normal-foreground:  rgba ( 0,0,0, 100 % );
-    /*foreground:                  rgba ( 75,255,220, 100 % );*/
-	/*foreground: rgba(75,255,220,1);*/
-	foreground: rgba(255, 255, 255, 0.9);
+    foreground:                  rgba(255, 255, 255, 0.9);
     normal-foreground:           @foreground;
     alternate-normal-background: rgba ( 255, 255, 255, 7 % );
     red:                         rgba ( 220, 50, 47, 100 % );
@@ -14,8 +12,7 @@
     lightbg:                     rgba ( 238, 232, 213, 100 % );
     selected-active-foreground:  rgba ( 0,0,0, 000 % );
     alternate-active-background: rgba ( 255, 255, 255, 0 % );
-    /*background:                  rgba ( 41, 159, 199, 60 % );*/
-	background:					 rgba( 0, 0, 0, 0.6);
+    background:                  rgba( 0, 0, 0, 0.6);
     bordercolor:                 rgba ( 75,255,220, 100 % );
     alternate-normal-foreground: @foreground;
     normal-background:           rgba ( 0, 0, 0, 0 % );
@@ -36,8 +33,8 @@
     background-color: @background;
     border:           0;
     padding:          5;
-	width: 100%;
-	padding: 800px;
+    width: 100%;
+    padding: 800px;
 }
 #mainbox {
     border:  0;
@@ -64,8 +61,7 @@
     padding: 1px ;
 }
 #element.normal.normal {
-    /*background-color: @normal-background;*/
-	background-color: rgba(0,0,0,0);
+    background-color: rgba(0,0,0,0);
     text-color:       @normal-foreground;
 }
 #element.normal.urgent {
@@ -77,10 +73,8 @@
     text-color:       @active-foreground;
 }
 #element.selected.normal {
-    /*background-color: @selected-normal-background;*/
-	background-color: rgba(0,0,0,0);
-    /*text-color:       @selected-normal-foreground;*/
-	text-color: rgba(75,255,220,0.9);
+    background-color: rgba(0,0,0,0);
+    text-color: rgba(75,255,220,0.9);
 }
 #element.selected.urgent {
     background-color: @selected-urgent-background;
@@ -91,8 +85,7 @@
     text-color:       @selected-active-foreground;
 }
 #element.alternate.normal {
-    /*background-color: @alternate-normal-background;*/
-	background-color: rgba(0,0,0,0);
+    background-color: rgba(0,0,0,0);
     text-color:       @alternate-normal-foreground;
 }
 #element.alternate.urgent {
