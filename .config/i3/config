@@ -105,6 +105,16 @@ set $w7 "7:"
 set $w8 "8:"
 set $w9 "9:"
 set $w10 "10:"
+set $w11 "11:"
+set $w12 "12:"
+set $w13 "13:"
+set $w14 "14:"
+set $w15 "15:"
+set $w16 "16:"
+set $w17 "17:"
+set $w18 "18:"
+set $w19 "19:"
+set $w20 "20:"
 
 # switch to workspace
 bindsym $mod+1 workspace $w1
@@ -118,6 +128,18 @@ bindsym $mod+8 workspace $w8
 bindsym $mod+9 workspace $w9
 bindsym $mod+0 workspace $w10
 
+# switch to workspace 11-20
+bindsym $mod+Control+1 workspace $w11
+bindsym $mod+Control+2 workspace $w12
+bindsym $mod+Control+3 workspace $w13
+bindsym $mod+Control+4 workspace $w14
+bindsym $mod+Control+5 workspace $w15
+bindsym $mod+Control+6 workspace $w16
+bindsym $mod+Control+7 workspace $w17
+bindsym $mod+Control+8 workspace $w18
+bindsym $mod+Control+9 workspace $w19
+bindsym $mod+Control+0 workspace $w20
+
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace $w1
 bindsym $mod+Shift+2 move container to workspace $w2
@@ -129,6 +151,18 @@ bindsym $mod+Shift+7 move container to workspace $w7
 bindsym $mod+Shift+8 move container to workspace $w8
 bindsym $mod+Shift+9 move container to workspace $w9
 bindsym $mod+Shift+0 move container to workspace $w10
+
+# move focused container to workspace
+bindsym $mod+Shift+Control+1 move container to workspace $w11
+bindsym $mod+Shift+Control+2 move container to workspace $w12
+bindsym $mod+Shift+Control+3 move container to workspace $w13
+bindsym $mod+Shift+Control+4 move container to workspace $w14
+bindsym $mod+Shift+Control+5 move container to workspace $w15
+bindsym $mod+Shift+Control+6 move container to workspace $w16
+bindsym $mod+Shift+Control+7 move container to workspace $w17
+bindsym $mod+Shift+Control+8 move container to workspace $w18
+bindsym $mod+Shift+Control+9 move container to workspace $w19
+bindsym $mod+Shift+Control+0 move container to workspace $w20
 
 workspace_auto_back_and_forth yes
 
@@ -143,7 +177,6 @@ for_window [class="^Spotify$"] move to workspace $w10
 #for_window [class="^Spotify$"] floating enable
 assign [class="Telegram"] $w4
 assign [class="discord"] $w5
-
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -237,6 +270,11 @@ exec --no-startup-id xfce4-clipman
 #}
 
 ## Personal keybindings and configurations ##
+focus_follows_mouse no
+
+# move focused workspace between monitors
+bindsym $mod+Ctrl+greater move workspace to output right
+bindsym $mod+Ctrl+less move workspace to output left
 
 # Power bluetooth on on start up
 exec_always --no-startup-id bluetoothctl power on
@@ -251,17 +289,24 @@ exec_always --no-startup-id $HOME/.xmodmaploader.sh
 exec_always --no-startup-id dunst
 
 # set background
-exec_always --no-startup-id feh --bg-scale $HOME/Pictures/mrrobot.jpg
+exec_always --no-startup-id feh --bg-scale $PATH_BACKGROUND_PHOTO
 
 # change keyboard layout to the appropriate one
 # exec_always --no-startup-id setxkbmap -layout us -variant altgr-intl -option compose:ralt
-exec_always --no-startup-id setxkbmap -layout br -option compose:ralt
+exec_always --no-startup-id setxkbmap -layout br -option compose:ralt -option altwin:swap_alt_win
 # change keyboard layort to portuguese
 mode "keyboard" {
-    bindsym u exec setxkbmap -layout us -variant altgr-intl -option compose:ralt && xmodmap $HOME/.Xmodmap
-    bindsym p exec setxkbmap -layout br -option nativo-uso && xmodmap $HOME/.Xmodmap
-    bindsym b exec setxkbmap -layout br -variant dvorak && xmodmap $HOME/.Xmodmap
-    bindsym d exec setxkbmap -layout us -variant dvorak && xmodmap $HOME/.Xmodmap
+    bindsym u exec setxkbmap -layout us -variant altgr-intl \
+        -option compose:ralt -option altwin:swap_alt_win && xmodmap $HOME/.Xmodmap
+
+    bindsym p exec setxkbmap -layout br -option compose:ralt \
+        -option altwin:swap_alt_win && xmodmap $HOME/.Xmodmap
+
+    bindsym b exec setxkbmap -layout br -variant dvorak \
+        -option altwin:swap_alt_win && xmodmap $HOME/.Xmodmap
+
+    bindsym d exec setxkbmap -layout us -variant dvorak \
+        -option altwin:swap_alt_win && xmodmap $HOME/.Xmodmap
 
     # back to normal: Enter or Escape
     bindsym Return mode "default"
@@ -277,23 +322,29 @@ bindsym $mod+Control+l mode "keyboard"
 exec_always --no-startup-id xinput set-prop 'Synaptics TM3127-001' 'libinput Tapping Enabled' 1
 exec_always --no-startup-id xinput set-prop 'Synaptics TM3127-001' 'libinput Natural Scrolling Enabled' 1
 
+# start logid
+exec --no-startup-id logid --config .config/logid/config
+
 # Media control - specially for Spotify
-bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioPlay exec playerctl -p $DEFAULT_PLAYER play-pause
 #bindsym XF86AudioPause exec playerctl pause
-bindsym XF86AudioNext exec playerctl next
-bindsym XF86AudioPrev exec playerctl previous
+bindsym XF86AudioNext exec playerctl -p $DEFAULT_PLAYER next
+bindsym XF86AudioPrev exec playerctl -p $DEFAULT_PLAYER previous
 
 # Screen brightness
 bindsym XF86MonBrightnessUp exec xbacklight -inc 10
 bindsym XF86MonBrightnessDown exec xbacklight -dec 10
 
+# Audio toggle to mute microphone using i3
+bindsym $mod+z exec amixer set Capture toggle
+
 # pulseaudio controls
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5%
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5%
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume $(pactl list short sinks | cut -f 1) +5%
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume $(pactl list short sinks | cut -f 1) -5%
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute $(pactl list short links | cut -f 1) toggle
 
 # screenshot
-bindsym Print exec --no-startup-id deepin-screen-recorder
+bindsym Print exec --no-startup-id flameshot gui
 
 # shortcuts
 bindsym $mod+Control+w exec --no-startup-id firefox --new-window https://web.whatsapp.com/
@@ -305,4 +356,5 @@ bindsym $mod+Control+c exec chromium
 bindsym $mod+Control+t exec telegram-desktop
 bindsym $mod+Control+n exec notion-app
 bindsym $mod+Control+d exec discord
+bindsym $mod+Shift+s exec steam
 
