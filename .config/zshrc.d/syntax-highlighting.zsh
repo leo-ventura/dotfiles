@@ -1,5 +1,19 @@
 # Setting up syntax highlighting
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+LINUX_PATH="/usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+MACOS_PATH="/usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+
+USER_PATH=$HOME/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+if [ -f $USER_PATH ]; then
+        source $DEFAULT_PATH
+else
+        # [ref]: https://stackoverflow.com/a/3466183
+        unameOut="$(uname -s)"
+        case "${unameOut}" in
+            Linux*)     source ${LINUX_PATH};;
+            Darwin*)    source ${MACOS_PATH};;
+        esac
+fi
 
 # Colors available
 # black, red, green, yellow, blue, magenta, cyan, white
@@ -8,7 +22,7 @@ source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zs
 
 ZSH_HIGHLIGHT_STYLES[suffix-alias]='fg=blue,bold'
 ZSH_HIGHLIGHT_STYLES[precommand]='fg=blue,bold'
-ZSH_HIGHLIGHT_STYLES[arg0]='fg=blue'
+ZSH_HIGHLIGHT_STYLES[arg0]='fg=049'
 ZSH_HIGHLIGHT_STYLES[command]='fg=blue,bold'
 ZSH_HIGHLIGHT_STYLES[builtin]='fg=blue,bold'
 ZSH_HIGHLIGHT_STYLES[path]='fg=cyan,bold'
