@@ -49,7 +49,7 @@ highlight ColorColumn ctermbg=0 guibg=lightgrey
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'morhetz/gruvbox'
 Plug 'tweekmonster/gofmt.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'vim-utils/vim-man'
@@ -57,19 +57,11 @@ Plug 'mbbill/undotree'
 Plug 'sheerun/vim-polyglot'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-Plug 'valloric/youcompleteme'
 
 call plug#end()
 
 " Colorscheme
-colorscheme monokai_pro_spectrum
-
-" Multicursor support
-nmap <silent> <leader><C-c> <Plug>(coc-cursors-position)
-nmap <silent> <leader><C-d> <Plug>(coc-cursors-word)
-xmap <silent> <leader><C-d> <Plug>(coc-cursors-range)
-
-hi CocCursorRange guibg=#b16286 guifg=#ebdbb2
+colorscheme gruvbox
 
 " --- vim go (polyglot) settings.
 let g:go_highlight_build_constraints = 1
@@ -145,8 +137,6 @@ nnoremap <leader>t :NERDTreeToggle<CR>
 
 " Open buffers
 nnoremap <leader>b :Buffers<CR>
-" Go to definition using YouCompleteMe
-nnoremap <F12> :YcmCompleter GoTo<CR>
 
 vnoremap X "_d
 inoremap <C-c> <esc>
@@ -156,39 +146,6 @@ function! s:check_back_space() abort
     return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
-inoremap <silent><expr> <TAB>
-            \ pumvisible() ? "\<C-n>" :
-            \ <SID>check_back_space() ? "\<TAB>" :
-            \ coc#refresh()
-
-command! -nargs=0 Prettier :CocCommand prettier.formatFile
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-inoremap <silent><expr> <C-space> coc#refresh()
-
-" GoTo code navigation.
-nmap <leader>gd <Plug>(coc-definition)
-nmap <leader>gy <Plug>(coc-type-definition)
-nmap <leader>gi <Plug>(coc-implementation)
-nmap <leader>gr <Plug>(coc-references)
-nmap <leader>rr <Plug>(coc-rename)
-nmap g[ <Plug>(coc-diagnostic-prev)
-nmap g] <Plug>(coc-diagnostic-next)
-nmap <silent> <leader>gp <Plug>(coc-diagnostic-prev-error)
-nmap <silent> <leader>gn <Plug>(coc-diagnostic-next-error)
-nnoremap <leader>cr :CocRestart
-
-" Chooses the commit from the right window
-nmap <leader>gh :diffget //3<CR>
-"Choses the commit from the left window
-nmap <leader>gu :diffget //2<CR>
-" Show git status
-nmap <leader>gs :G<CR>
-" Show diff
-nmap <leader>gg :Gdiff<CR>
-" Commit changes
-nmap <leader>gc :Gcommit<CR>
-" Push changes
-nmap <leader>gp :Gpush<CR>
 
 fun! TrimWhitespace()
     let l:save = winsaveview()
