@@ -84,6 +84,12 @@ get_pwd() {
 	echo -n "%F{093}$r%f"
 }
 
+get_env() {
+	if [[ ! -z "$DOTFILES_ENV" ]]; then
+		echo -n "($DOTFILES_ENV)"
+	fi
+}
+
 user() {
 	echo -n "%F{129}$(whoami)%f"
 }
@@ -98,5 +104,5 @@ git_info() {
 left_separator="%F{123}$(echo -n '\uf101')%f"
 right_separator="%F{123}$(echo -n '\uf100')%f"
 
-PROMPT=" \$(get_pwd) \$(git_info)%F{123}$(echo -n '\uf101')%f "
+PROMPT="\$(get_env) \$(get_pwd) \$(git_info)%F{123}$(echo -n 'π')%f "
 RPROMPT=" \$(get_error) "
