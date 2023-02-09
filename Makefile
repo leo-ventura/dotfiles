@@ -30,11 +30,11 @@ oh-my-zsh-theme:
 	cp ${SRC}/${OHMYZSH_CUSTOM_THEME_PATH} ${DST}/${OHMYZSH_CUSTOM_THEME_PATH}
 
 copy-files: oh-my-zsh-theme config-files
-        @echo "[*] Finished copying files"
+	@echo "[*] Finished copying files"
 
 nvim-plug-install:
 	sh -c 'curl -fLo ${DST}/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 
 install: oh-my-zsh copy-files nvim-plug-install
-        @echo "[*] Installation complete"
+	@echo "[*] Installation complete"
 
