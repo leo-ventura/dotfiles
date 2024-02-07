@@ -11,9 +11,9 @@ features-targets := nvim zshrc.d
 
 oh-my-zsh:
 	@echo "[*] Downloading oh-my-zsh intall script"
-	wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
+	curl https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh -o install.sh
 	@echo "[*] Running installation script"
-	sh install.sh
+	sh ./install.sh
 	@echo "[!] Moving installation script to /tmp"
 	mv install.sh /tmp/oh-my-zsh-installation-script.sh
 
