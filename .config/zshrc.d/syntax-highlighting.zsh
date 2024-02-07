@@ -1,6 +1,6 @@
 # Setting up syntax highlighting
 
-LINUX_PATH="/usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+LINUX_PATH="/usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 MACOS_PATH="/usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 
 USER_PATH=$HOME/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
